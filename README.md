@@ -35,6 +35,39 @@ This project demonstrates the use of MongoDB Vector Search in a Laravel backend 
 - Points of interest recommendation
 - Intelligent trip planning using OpenAI integration
 
+## Vector Search and Laravel sdk
+The points of interest controller search cities by embeddings generated on city - attraction - desc concat, and gets the searched term as $search
+```php
+$embedding = $this->generateEmbedding($search);
+    
+    // Use Atlas Search to search for points of interest within a city
+    $points = DB::collection('points_of_interest')
+    ->raw(
+        function ( $collection) use ($embedding) {
+            
+            return $collection->aggregate([
+                    [
+                        '$vectorSearch' => [
+                            'index' => 'vector_index',
+                            'path' => 'embedding',
+                            'queryVector' => $embedding,
+                            'numCandidates' => 20,
+                            'limit' => 5
+                            ],
+                        ]
+                    ,
+                    ['$project' => [
+                        'name' => 1,
+                        'description' => 1,
+                        'rating' => 1,
+                        'location' => 1,
+                        'score' => ['$meta' => 'vectorSearchScore']
+                    ]]
+                ]
+                );
+        },
+    )->toArray();
+```
 ## Prerequisites
 
 - PHP 8.1+
