@@ -1,0 +1,420 @@
+[{
+  "name": "Eiffel Tower",
+  "description": "Iconic iron lattice tower on the Champ de Mars in Paris.",
+  "type": "landmark",
+  "location": {
+    "city": "Paris",
+    "country": "France",
+    "coordinates": [
+      48.8584,
+      2.2945
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Louvre Museum",
+  "description": "The world's largest art museum and a historic monument in Paris.",
+  "type": "museum",
+  "location": {
+    "city": "Paris",
+    "country": "France",
+    "coordinates": [
+      48.8606,
+      2.3376
+    ]
+  },
+  "rating": 4.8
+},
+{
+  "name": "Central Park",
+  "description": "Urban park in Manhattan, New York City.",
+  "type": "park",
+  "location": {
+    "city": "New York",
+    "country": "USA",
+    "coordinates": [
+      40.7829,
+      -73.9654
+    ]
+  },
+  "rating": 4.6
+},
+{
+  "name": "Tokyo Skytree",
+  "description": "Broadcasting and observation tower in Sumida, Tokyo.",
+  "type": "landmark",
+  "location": {
+    "city": "Tokyo",
+    "country": "Japan",
+    "coordinates": [
+      35.7101,
+      139.8107
+    ]
+  },
+  "rating": 4.5
+},
+{
+  "name": "Colosseum",
+  "description": "Oval amphitheatre in the centre of Rome, Italy.",
+  "type": "historical site",
+  "location": {
+    "city": "Rome",
+    "country": "Italy",
+    "coordinates": [
+      41.8902,
+      12.4922
+    ]
+  },
+  "rating": 4.9
+},
+{
+  "name": "Sagrada Familia",
+  "description": "A large unfinished Roman Catholic basilica in Barcelona, designed by architect Antoni Gaudí.",
+  "type": "landmark",
+  "location": {
+    "city": "Barcelona",
+    "country": "Spain",
+    "coordinates": [
+      41.4036,
+      2.1744
+    ]
+  },
+  "rating": 4.8
+},
+{
+  "name": "The Prado Museum",
+  "description": "Spain's main national art museum, located in central Madrid. It features one of the world's finest collections of European art.",
+  "type": "museum",
+  "location": {
+    "city": "Madrid",
+    "country": "Spain",
+    "coordinates": [
+      40.4138,
+      -3.6921
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Alhambra",
+  "description": "A palace and fortress complex located in Granada, Andalusia, Spain. Renowned for its stunning Islamic architecture.",
+  "type": "historical site",
+  "location": {
+    "city": "Granada",
+    "country": "Spain",
+    "coordinates": [
+      37.1761,
+      -3.5881
+    ]
+  },
+  "rating": 4.8
+},
+{
+  "name": "Brandenburg Gate",
+  "description": "An 18th-century neoclassical monument in Berlin, one of the best-known landmarks of Germany.",
+  "type": "landmark",
+  "location": {
+    "city": "Berlin",
+    "country": "Germany",
+    "coordinates": [
+      52.5163,
+      13.3777
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Neuschwanstein Castle",
+  "description": "A 19th-century Romanesque Revival palace on a rugged hill above the village of Hohenschwangau near Füssen in southwest Bavaria, Germany.",
+  "type": "castle",
+  "location": {
+    "city": "Hohenschwangau",
+    "country": "Germany",
+    "coordinates": [
+      47.5576,
+      10.7498
+    ]
+  },
+  "rating": 4.8
+},
+{
+  "name": "Cologne Cathedral",
+  "description": "A renowned Gothic cathedral in Cologne, Germany. It is a World Heritage Site, famous for its architecture and history.",
+  "type": "cathedral",
+  "location": {
+    "city": "Cologne",
+    "country": "Germany",
+    "coordinates": [
+      50.9413,
+      6.9583
+    ]
+  },
+  "rating": 4.8
+},
+{
+  "name": "The Great Wall of China",
+  "description": "A series of fortifications made of stone, brick, tamped earth, wood, and other materials, generally built along an east-to-west line across the historical northern borders of China.",
+  "type": "historical site",
+  "location": {
+    "city": "Beijing",
+    "country": "China",
+    "coordinates": [
+      40.4319,
+      116.5704
+    ]
+  },
+  "rating": 4.9
+},
+{
+  "name": "Terracotta Army",
+  "description": "A collection of terracotta sculptures depicting the armies of Qin Shi Huang, the first Emperor of China.",
+  "type": "museum",
+  "location": {
+    "city": "Xi'an",
+    "country": "China",
+    "coordinates": [
+      34.3853,
+      109.277
+    ]
+  },
+  "rating": 4.8
+},
+{
+  "name": "The Forbidden City",
+  "description": "A palace complex in central Beijing, China. It housed the emperors of China for almost 500 years.",
+  "type": "historical site",
+  "location": {
+    "city": "Beijing",
+    "country": "China",
+    "coordinates": [
+      39.9163,
+      116.3972
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Park Güell",
+  "description": "A public park system composed of gardens and architectonic elements located on Carmel Hill, in Barcelona. Designed by Antoni Gaudí.",
+  "type": "park",
+  "location": {
+    "city": "Barcelona",
+    "country": "Spain",
+    "coordinates": [
+      41.4145,
+      2.1527
+    ]
+  },
+  "rating": 4.6
+},
+{
+  "name": "Montjuïc",
+  "description": "A broad shallow hill with a relatively flat top overlooking the harbor, to the southwest of the city center of Barcelona.",
+  "type": "natural feature",
+  "location": {
+    "city": "Barcelona",
+    "country": "Spain",
+    "coordinates": [
+      41.3646,
+      2.1569
+    ]
+  },
+  "rating": 4.5
+},
+{
+  "name": "Royal Palace of Madrid",
+  "description": "The official residence of the Spanish Royal Family at the city of Madrid, but it is only used for state ceremonies.",
+  "type": "historical site",
+  "location": {
+    "city": "Madrid",
+    "country": "Spain",
+    "coordinates": [
+      40.4173,
+      -3.7143
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Retiro Park",
+  "description": "A large park in the center of Madrid, known for its beautiful sculptures and monuments, galleries, a peaceful lake, and host to a variety of events.",
+  "type": "park",
+  "location": {
+    "city": "Madrid",
+    "country": "Spain",
+    "coordinates": [
+      40.4154,
+      -3.6845
+    ]
+  },
+  "rating": 4.6
+},
+{
+  "name": "Generalife",
+  "description": "A villa with gardens located on the Cerro del Sol (Hill of the Sun), adjacent to the Alhambra, which served as a place of recreation and rest for the Muslim kings of Granada.",
+  "type": "historical site",
+  "location": {
+    "city": "Granada",
+    "country": "Spain",
+    "coordinates": [
+      37.1761,
+      -3.5881
+    ]
+  },
+  "rating": 4.5
+},
+{
+  "name": "Sierra Nevada",
+  "description": "A mountain range in the region of Andalucia, containing the highest point of continental Spain, Mulhacén at 3479 meters (11,414 ft).",
+  "type": "natural feature",
+  "location": {
+    "city": "Granada",
+    "country": "Spain",
+    "coordinates": [
+      37.0564,
+      -3.3832
+    ]
+  },
+  "rating": 4.6
+},
+{
+  "name": "Reichstag Building",
+  "description": "Historic edifice in Berlin, Germany, constructed to house the Imperial Diet of the German Empire. It was opened in 1894 and housed the Diet until 1933.",
+  "type": "historical site",
+  "location": {
+    "city": "Berlin",
+    "country": "Germany",
+    "coordinates": [
+      52.5186,
+      13.3762
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Berlin Wall Memorial",
+  "description": "A reminder of the division of Berlin by the Berlin Wall and a tribute to those who lost their lives during its existence.",
+  "type": "museum",
+  "location": {
+    "city": "Berlin",
+    "country": "Germany",
+    "coordinates": [
+      52.535,
+      13.3904
+    ]
+  },
+  "rating": 4.6
+},
+{
+  "name": "Linderhof Palace",
+  "description": "A small palace in southwest Bavaria near Ettal Abbey. It is the smallest of the three palaces built by King Ludwig II of Bavaria.",
+  "type": "palace",
+  "location": {
+    "city": "Hohenschwangau",
+    "country": "Germany",
+    "coordinates": [
+      47.5715,
+      10.9604
+    ]
+  },
+  "rating": 4.5
+},
+{
+  "name": "Tegelberg",
+  "description": "A mountain and ski resort in the Ammergau Alps near Hohenschwangau, Bavaria. It offers panoramic views of Neuschwanstein Castle and the surrounding areas.",
+  "type": "natural feature",
+  "location": {
+    "city": "Hohenschwangau",
+    "country": "Germany",
+    "coordinates": [
+      47.5574,
+      10.7331
+    ]
+  },
+  "rating": 4.4
+},
+{
+  "name": "Chocolate Museum",
+  "description": "A museum in Cologne dedicated to the history of chocolate, from its beginnings with the Olmecs, Maya, and Aztecs to contemporary products and production methods.",
+  "type": "museum",
+  "location": {
+    "city": "Cologne",
+    "country": "Germany",
+    "coordinates": [
+      50.9322,
+      6.9644
+    ]
+  },
+  "rating": 4.5
+},
+{
+  "name": "Cologne Zoo",
+  "description": "A zoo founded in 1860, featuring over 7,000 animals of more than 700 species on more than 20 hectares.",
+  "type": "zoo",
+  "location": {
+    "city": "Cologne",
+    "country": "Germany",
+    "coordinates": [
+      50.9601,
+      6.9816
+    ]
+  },
+  "rating": 4.4
+},
+{
+  "name": "Summer Palace",
+  "description": "A vast ensemble of lakes, gardens, and palaces in Beijing. It serves as a popular tourist destination and recreational park.",
+  "type": "historical site",
+  "location": {
+    "city": "Beijing",
+    "country": "China",
+    "coordinates": [
+      40.0027,
+      116.2728
+    ]
+  },
+  "rating": 4.7
+},
+{
+  "name": "Temple of Heaven",
+  "description": "An imperial complex of religious buildings situated in the southeastern part of central Beijing.",
+  "type": "historical site",
+  "location": {
+    "city": "Beijing",
+    "country": "China",
+    "coordinates": [
+      39.8822,
+      116.4069
+    ]
+  },
+  "rating": 4.6
+},
+{
+  "name": "Shaanxi History Museum",
+  "description": "A museum located to the northwest of the Giant Wild Goose Pagoda in Xi'an, Shaanxi Province. It features artifacts from the Zhou to the Tang dynasties.",
+  "type": "museum",
+  "location": {
+    "city": "Xi'an",
+    "country": "China",
+    "coordinates": [
+      34.2168,
+      108.9619
+    ]
+  },
+  "rating": 4.5
+},
+{
+  "name": "Giant Wild Goose Pagoda",
+  "description": "A historic Buddhist pagoda in Xi'an, built in 652 during the Tang dynasty as a place to store and translate Sanskrit Buddhist scriptures.",
+  "type": "landmark",
+  "location": {
+    "city": "Xi'an",
+    "country": "China",
+    "coordinates": [
+      34.2163,
+      108.961
+    ]
+  },
+  "rating": 4.6
+}]
