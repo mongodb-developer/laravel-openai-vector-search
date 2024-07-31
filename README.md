@@ -195,7 +195,7 @@ Start the Laravel development server:
 php artisan serve
 ```
 
-Frontend Setup (Vue.js)
+## Frontend Setup (Vue.js)
 
 Navigate to the frontend directory:
 ```
