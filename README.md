@@ -68,6 +68,77 @@ $embedding = $this->generateEmbedding($search);
         },
     )->toArray();
 ```
+## Retrieval Augmented Generation and Laravel with OpenAI
+
+Using the relevant context from MongoDB to augment the trip planning JSON response
+
+```php
+protected function generatePossibleTrip($cities,$context, $days){
+        $result = OpenAI::chat()->create([
+            'model' => 'gpt-4o-mini',
+            'temperature' => 0,
+            'response_format' => ['type' => 'json_object'],
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You are a travel agent helping a customer plan a trip to a city. If it will be hard to visit that in the number of days Have a one day plan stating the problem. The customer will provide you with points of interest to visit in json.'
+                ],
+                [
+                    'role' => 'system',
+                    'content' => 'take this schema, for flights add orig_airport_code and dest_airport_code: 
+    "tripPlan": {
+      "destination": [{
+        "city": "string",
+        "country": "string"
+                    }],
+      "pointsOfInterest": [
+        {
+          "name": "string",
+          "description": "string",
+          "location": {
+            "coordinates": [number, number]
+          },
+          "rating": number
+        }
+      ],
+      // only in relevant direction
+      "flights" : [ "src_airport_code": "string",
+                "dest_airport_code": "string" 
+      ],
+      "itinerary": [
+        {
+          "day": number,
+          "destination": "string",
+          "activities": [
+            {
+              "time": "string",
+              "activity": "string",
+              "duration": "string",
+              // if flight
+               "src_airport_code": "string",
+                dest_airport_code: "string" 
+            }
+              ...
+          ]
+
+        }
+          ...
+      ]
+    }
+ '
+                ],
+                [
+                    'role' => 'user',
+                    'content' => 'For cities: ' . json_encode($cities) . '| Take this POIs: ' . $context . ' and build a plan for the a trip of ' . $days . 'days. '
+                ]
+            ]
+        ]);
+
+        return $result->choices[0]->message->content;
+    
+    }
+```
+
 ## Prerequisites
 
 - PHP 8.1+
