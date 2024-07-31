@@ -201,11 +201,14 @@ Navigate to the frontend directory:
 ```
 cd frontend/trip-planner-frontend
 npm install
-npm start
+npm run serve
 ```
 
+The application should be visible at http://localhost:3000 .
 
+## Disclaimer
 
+**Not a MongoDB official product. Use at your own risk**
 
 
 
