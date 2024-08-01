@@ -204,7 +204,7 @@ npm install
 npm run serve
 ```
 
-The application should be visible at http://localhost:3000 .
+The application should be visible at http://localhost:8080 .
 
 ## Disclaimer
 
