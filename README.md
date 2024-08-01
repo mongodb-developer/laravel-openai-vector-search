@@ -148,7 +148,7 @@ protected function generatePossibleTrip($cities,$context, $days){
 
 ## Backend Setup (Laravel)
 
-Navigate to the backend directory:
+Navigate to the cloned directory:
 
 ```
 cd laravel-openai-vector-search
