@@ -3,31 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\PointOfInterest;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use OpenAI\Laravel\Facades\OpenAI;
-
 
 class PointOfInterestController extends Controller
 {
-    public function getSupportedCities()
+    /**
+     * Get a list of supported cities.
+     *
+     * @return JsonResponse
+     */
+    public function getSupportedCities(): JsonResponse
     {
         $cities = PointOfInterest::distinct('location.city')->get();
         
         return response()->json($cities);
     }
 
-    protected function generateEmbedding($text)
-{
+    /**
+     * Generate an embedding for the given text using OpenAI's API.
+     *
+     * @param string $text
+     * @return array
+     */
+    protected function generateEmbedding(string $text): array
+    {
         $response = OpenAI::embeddings()->create([
             'model' => 'text-embedding-3-small',
             'input' => $text
         ]);
         return $response->embeddings[0]->embedding;
-    
-}
+    }
 
-    protected function generatePossibleTrip($cities,$context, $days){
+    /**
+     * Generate a possible trip plan using OpenAI's GPT model.
+     *
+     * @param array $cities
+     * @param string $context
+     * @param int $days
+     * @return string
+     */
+    protected function generatePossibleTrip(array $cities, string $context, int $days): string
+    {
         $result = OpenAI::chat()->create([
             'model' => 'gpt-4o-mini',
             'temperature' => 0,
@@ -72,11 +91,8 @@ class PointOfInterestController extends Controller
                "src_airport_code": "string",
                 dest_airport_code: "string" 
             }
-              ...
           ]
-
         }
-          ...
       ]
     }
  '
@@ -89,9 +105,15 @@ class PointOfInterestController extends Controller
         ]);
 
         return $result->choices[0]->message->content;
-    
     }
-    public function getTopPointsForCity(Request $request)
+
+    /**
+     * Get top points of interest for a given city.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getTopPointsForCity(Request $request): JsonResponse
     {
         $city = $request->query('city');
 
@@ -102,110 +124,88 @@ class PointOfInterestController extends Controller
         $points = DB::collection('points_of_interest')->whereRaw(['location.city' => $city])
             ->orderBy('rating', 'desc')
             ->project(['name' => 1, 'description' => 1, 'rating' => 1, 'location' => 1])
-           
             ->limit(10)->get();
 
-        
-            // $points = $points->transform(function ($point) {
-            //     if (empty($point['embedding'])) {
-            //         $embeddingText = $point['location']['city'] . ' ' . $point['name'] . ' ' . $point['description'];
-            //         $embedding = $this->generateEmbedding($embeddingText);
-                    
-            //         // Update the database
-            //         DB::collection('points_of_interest')->where('_id', $point['_id'])->update(['embedding' => $embedding]);
-                    
-            //     }
-            //     return $point;
-            // });
-
-    
-        
-
         return response()->json(['context' => $points]);
-       //'suggestion' => $ai_trip ]);
-    
-
     }
 
+    /**
+     * Plan a trip based on given cities and number of days.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function planTrip(Request $request): JsonResponse
+    {
+        try {
+            $cities = $request->input('cities');
+            $days = $request->input('days');
 
-    public function planTrip(Request $request)
-{
-    try {
-        // Retrieve from request body
-        $cities = $request->input('cities');
-        $days = $request->input('days');
+            if (!$cities) {
+                return response()->json(['error' => 'Cities parameter is required'], 400);
+            }
 
-        if (!$cities) {
-            return response()->json(['error' => 'Cities parameter is required'], 400);
+            if (!$days) {
+                return response()->json(['error' => 'Days parameter is required'], 400);
+            }
+
+            $points = DB::collection('points_of_interest')->whereIn('location.city', $cities)
+                ->orderBy('rating', 'desc')
+                ->project(['name' => 1, 'description' => 1, 'rating' => 1, 'location' => 1])
+                ->limit(60)->get();
+
+            if ($points->isEmpty()) {
+                return response()->json(['error' => 'No points of interest found for the specified cities'], 404);
+            }
+
+            $ai_trip = $this->generatePossibleTrip($cities, $points, $days);
+            $ai_trip = json_decode($ai_trip, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \Exception('Failed to decode AI trip data');
+            }
+
+            $flights = [];
+            foreach ($ai_trip['tripPlan']['flights'] as $flight) {
+                $flightResults = DB::collection('air_routes')
+                    ->where('src_airport', $flight['src_airport_code'])
+                    ->where('dst_airport', $flight['dest_airport_code'])
+                    ->get();
+                
+                $flights = array_merge($flights, $flightResults->toArray());
+            }
+
+            return response()->json([
+                'context' => $points, 
+                'suggestion' => $ai_trip, 
+                'flights' => $flights
+            ]);
+
+        } catch (\Exception $e) {
+            \Log::error('Error in planTrip: ' . $e->getMessage());
+            return response()->json(['error' => 'An error occurred while planning the trip: ' . $e->getMessage()], 500);
         }
-
-        if (!$days) {
-            return response()->json(['error' => 'Days parameter is required'], 400);
-        }
-
-        $points = DB::collection('points_of_interest')->whereIn('location.city', $cities)
-            ->orderBy('rating', 'desc')
-            ->project(['name' => 1, 'description' => 1, 'rating' => 1, 'location' => 1])
-            ->limit(60)->get();
-
-        if ($points->isEmpty()) {
-            return response()->json(['error' => 'No points of interest found for the specified cities'], 404);
-        }
-
-        $ai_trip = $this->generatePossibleTrip($cities,$points, $days);
-        $ai_trip = json_decode($ai_trip, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Failed to decode AI trip data');
-        }
-
-        $flights = [];
-        foreach ($ai_trip['tripPlan']['flights'] as $flight) {
-            $flightResults = DB::collection('air_routes')
-                ->where('src_airport', $flight['src_airport_code'])
-                ->where('dst_airport', $flight['dest_airport_code'])
-                ->get();
-            
-            $flights = array_merge($flights, $flightResults->toArray());
-        }
-
-        return response()->json([
-            'context' => $points, 
-            'suggestion' => $ai_trip, 
-            'flights' => $flights
-        ]);
-
-    } catch (\Exception $e) {
-        \Log::error('Error in planTrip: ' . $e->getMessage());
-        return response()->json(['error' => 'An error occurred while planning the trip: ' . $e->getMessage()], 500);
     }
-}
-    public function searchByCity(Request $request)
-{   
-    $city = $request->query('city');
-    if (!$city) {
-        return response()->json(['error' => 'City parameter is required'], 400);
-    }
-    // parse url encoding to spaces
-    $city = str_replace('%20', ' ', $city);
-    
-    $embedding = $this->generateEmbedding($city);
-    
-    // Use Atlas Search to search for points of interest within a city
-    $points = DB::collection('points_of_interest')
-    ->raw(
-        function ( $collection) use ($embedding) {
-            
-            return $collection->aggregate([
-                    // [
-                    //     '$search' => [
-                    //         'index' => 'default',
-                    //         'regex' => [
-                    //             'path' => 'location.city',
-                    //             'query' => ".*{$city}.*"
-                    //         ]
-                    //     ]
-                    // ],
+
+    /**
+     * Search for points of interest by city using vector search.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchByCity(Request $request): JsonResponse
+    {   
+        $search = $request->query('city');
+        if (!$search) {
+            return response()->json(['error' => 'City parameter is required'], 400);
+        }
+        $city = str_replace('%20', ' ', $search);
+        
+        $embedding = $this->generateEmbedding($search);
+        
+        $points = DB::collection('points_of_interest')
+            ->raw(function ($collection) use ($embedding) {
+                return $collection->aggregate([
                     [
                         '$vectorSearch' => [
                             'index' => 'vector_index',
@@ -213,26 +213,20 @@ class PointOfInterestController extends Controller
                             'queryVector' => $embedding,
                             'numCandidates' => 20,
                             'limit' => 5
-                            ],
+                        ],
+                    ],
+                    [
+                        '$project' => [
+                            'name' => 1,
+                            'description' => 1,
+                            'rating' => 1,
+                            'location' => 1,
+                            'score' => ['$meta' => 'vectorSearchScore']
                         ]
-                    ,
-                    ['$project' => [
-                        'name' => 1,
-                        'description' => 1,
-                        'rating' => 1,
-                        'location' => 1,
-                        'score' => ['$meta' => 'vectorSearchScore']
-                    ]]
-                ]
-                );
-        },
-    )->toArray();
+                    ]
+                ]);
+            })->toArray();
 
-    
-    return response()->json($points);
-   
-}
-
-
-
+        return response()->json($points);
+    }
 }
