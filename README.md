@@ -171,7 +171,7 @@ php artisan key:generate
 
 Run database migrations and seeders (if any):
 ```
-php artisan migrate --seed
+php artisan db:seed
 ```
 
 Create Atlas vector search index on database: `trip_planner` collection: `points_of_interest`:
