@@ -1,11 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p align="center"><a href="https://www.mongodb.com/developer/code-examples/php/laravel-openai-mongodb-vectorsearch" target="_blank"><img src="https://www.mongodb.com/developer/_next/image/?url=https%3A%2F%2Fimages.contentstack.io%2Fv3%2Fassets%2Fblt39790b633ee0d5a7%2Fbltc8c2f0bc52b11db2%2F65f99d358330b31ad002faea%2FLaravel_DevCenter.png&w=3840&q=75" width="400" alt="Laravel Logo"></a></p>
 
 ## About Laravel
 
@@ -19,7 +12,7 @@ To leverage MongoDB with Laravel see the following [resources](https://www.mongo
 
 ## Tour Planner with MongoDB Vector Search
 
-This project demonstrates the use of MongoDB Vector Search in a Laravel backend with a Vue.js frontend to create an intelligent tour planning application. It showcases how to leverage vector search capabilities for enhanced search and recommendation features in travel applications.
+This project demonstrates the use of MongoDB Vector Search in a Laravel backend with a Vue.js frontend to create an intelligent tour planning application. It showcases how to leverage vector search capabilities for enhanced search and recommendation features in travel applications. See the article [Introducing the Tour Planner With MongoDB Vector Search](https://www.mongodb.com/developer/code-examples/php/laravel-openai-mongodb-vectorsearch/)
 
 ### Project Structure
 
